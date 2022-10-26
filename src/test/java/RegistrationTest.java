@@ -1,15 +1,12 @@
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.ElementsCollection;
-import com.codeborne.selenide.Selenide;
-import org.apache.hc.core5.util.Asserts;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.Keys;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.*;
+
 
 public class RegistrationTest {
 
@@ -23,6 +20,8 @@ public class RegistrationTest {
         open("http://localhost:9999/");
         $("[data-test-id='city'] input").setValue("Москва");
         $("[data-test-id='name'] input").setValue("Агафонов Илья");
+        $("[data-test-id='date'] input").sendKeys(Keys.chord(Keys.SHIFT,Keys.HOME), Keys.BACK_SPACE);
+        $("[data-test-id='date'] input").setValue("10.11.2022");
         $("[data-test-id='phone'] input").setValue("+79251111111");
         $("[data-test-id='agreement']").click();
         $$("button").find(Condition.exactText("Забронировать")).click();
